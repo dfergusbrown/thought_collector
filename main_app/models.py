@@ -1,10 +1,19 @@
 from django.db import models
 
 # Create your models here.
+class Tag(models.Model):
+    name = models.CharField()
+
+    def __str__(self):
+        return self.name
+    
+
 class Thought(models.Model):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=250)
     date_time = models.DateTimeField()
+    tags = models.ManyToManyField(Tag)
+    
     EMOTION_CHOICES = {
         "HAPPINESS": "Happiness",
         "SADNESS": "Sadness",
@@ -19,6 +28,7 @@ class Thought(models.Model):
     def __str__(self):
         return self.name
 
+
 class Recurrence(models.Model):
     date = models.DateField()
     change = models.CharField(max_length=50)
@@ -27,3 +37,4 @@ class Recurrence(models.Model):
 
     def __str__(self):
         return f"A recurrence took place on {self.date}"
+    
