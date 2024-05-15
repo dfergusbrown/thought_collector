@@ -1,4 +1,6 @@
 from django.db import models
+from datetime import date
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Tag(models.Model):
@@ -13,7 +15,8 @@ class Thought(models.Model):
     description = models.CharField(max_length=250)
     date_time = models.DateTimeField()
     tags = models.ManyToManyField(Tag)
-    
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
     EMOTION_CHOICES = {
         "HAPPINESS": "Happiness",
         "SADNESS": "Sadness",
